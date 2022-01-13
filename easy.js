@@ -31,8 +31,54 @@ var assert = require("assert")
 // Explanation: Empty array...
 
 const altNumbers = (numArray) => {
-    // TODO: COMPLETE THIS FUNCTION
-    return [];
+    // Time Complexity: O(n), n = num elements in numArray
+    // Create 2 arrays to store positive and negative numbers
+    debugger;
+    let pos = [];
+    let neg = [];
+
+    // Split the given array into the positive and negative arrays keeping order O(n)
+    for (let i = 0; i < numArray.length; i++) {
+        if (numArray[i] >= 0) {
+            pos.push(numArray[i]);
+        }
+        else {
+            neg.push(numArray[i]);
+        }
+    }
+
+    // Store lengths of positive and negative array as constants 
+    // Time complexity for length is equal to number of array elements
+    let pos_len = pos.length;
+    let neg_len = neg.length;
+
+    // Retrieve alternating array by alternatingly looping through positive and negative arrays
+    // Starts with positive array
+    if (pos_len >= neg_len) {
+        return MergeArray(pos, neg, pos_len, neg_len);
+    }
+
+    // Starts with negative array
+    return MergeArray(neg, pos, neg_len, pos_len);
+}
+
+// Merges positive and negative arrays into an alternating array
+// Condition: Ensure array 1 is longer or equal to length array 2 
+function MergeArray(big_arr, small_arr, big_arr_len, small_arr_len) {
+    debugger;
+    const result = [];
+
+    // Combine both by alternatingly looping through pos and neg arrays
+    for (let i = 0; i < small_arr_len; i++) {
+        result.push(big_arr[i]);
+        result.push(small_arr[i]);
+    }
+
+    // Adds last element of the longer array
+    if (big_arr_len > small_arr_len) {
+        result.push(big_arr[big_arr_len - 1]);
+    }
+    return result;
 }
 
 module.exports = { altNumbers } // Do not modify this line
@@ -77,14 +123,14 @@ let array4 = []
 array4 = altNumbers(array4)
 assert(array4.length === 0)
 
-let array5 = [3,2,1,-1,-2,-3,-4]
+let array5 = [3, 2, 1, -1, -2, -3, -4]
 array5 = altNumbers(array5)
 const answer5 = [-1, 3, -2, 2, -3, 1, -4]
 for (let i = 0; i < array5.length; i++) {
     assert(array5[i] === answer5[i])
 }
 
-let array6 = [5,-1,-2,-3,-4,0,3]
+let array6 = [5, -1, -2, -3, -4, 0, 3]
 array6 = altNumbers(array6)
 const answer6 = [-1, 5, -2, 0, -3, 3, -4]
 for (let i = 0; i < array6.length; i++) {
